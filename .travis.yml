@@ -3,26 +3,35 @@ compiler:
   - gcc
 os:
   - linux
+sudo: required
 before_install:
- - sudo apt-get -qq update
- - sudo apt-get install -y libgtest-dev
- - cd /usr/src/gtest
- - sudo cmake CMakeLists.txt
- - sudo make
- - ls -l
- - sudo cp -a libgtest_main.a libgtest.a /usr/lib/
- - cd "${TRAVIS_BUILD_DIR}"
+  - sudo unlink /usr/bin/gcc && sudo ln -s /usr/bin/gcc-5 /usr/bin/gcc
+  - sudo wget https://github.com/google/googletest/archive/release-1.7.0.tar.gz
+  - sudo tar xf release-1.7.0.tar.gz
+  - cd googletest-release-1.7.0
+  - sudo cmake -DBUILD_SHARED_LIBS=ON .
+  - sudo make
+  - sudo cp -a include/gtest /usr/include
+  - sudo cp -a libgtest_main.so libgtest.so /usr/lib/
+  - cd "${TRAVIS_BUILD_DIR}"
 before_script:
- - cd test/
- - cmake CMakeLists.txt
- - make
- - ls -l
+  - cd test/
+  - cmake CMakeLists.txt
+  - make
+  - ls -l
 script:
   - ./utest
 branches:
   only:
     - master
     - develop
+addons:
+  apt:
+    sources:
+      - ubuntu-toolchain-r-test
+    packages:
+      - gcc-5
+      - g++-5
 notifications:
   recipients:
     - brandl.matthaeus@gmail.com
