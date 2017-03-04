@@ -11,4 +11,5 @@ target_link_libraries(utest ${GTEST_LIBRARIES} pthread)
 # Settings
 set_property(TARGET utest PROPERTY CXX_STANDARD 14)
 set_property(TARGET utest PROPERTY CXX_STANDARD_REQUIRED on)
+ADD_DEFINITIONS(-Wall -pedantic -std=c++14)
 
