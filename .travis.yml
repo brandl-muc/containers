@@ -1,12 +1,9 @@
 language: cpp
 compiler:
-  - gcc
+  - gcc5
 os:
   - linux
-env:
-  - GCC_VERSION=5
-  - CPP=14
-  - LIBCXX=Off
+#env: GCC_VERSION=5 CPP=14 LIBCXX=Off
 before_install:
   - sudo unlink /usr/bin/gcc && sudo ln -s /usr/bin/gcc-5 /usr/bin/gcc
   - gcc --version
