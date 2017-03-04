@@ -1,6 +1,6 @@
 language: cpp
 compiler:
-  - gcc5
+  - gcc-5
 os:
   - linux
 #env: GCC_VERSION=5 CPP=14 LIBCXX=Off
@@ -19,19 +19,19 @@ before_script:
   - cd test/
   - cmake CMakeLists.txt
 script:
-  - make -d
+  - make
   - ./utest
 branches:
   only:
     - master
     - develop
-addons:
-  apt:
-    sources:
-      - ubuntu-toolchain-r-test
-    packages:
-      - gcc-5
-      - g++-5
+#addons:
+#  apt:
+#    sources:
+#      - ubuntu-toolchain-r-test
+#    packages:
+#      - gcc-5
+#      - g++-5
 notifications:
   recipients:
     - brandl.matthaeus@gmail.com
