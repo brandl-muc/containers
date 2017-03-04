@@ -1,12 +1,12 @@
 language: cpp
 compiler:
-  - gcc-5
+  - g++
 os:
   - linux
-#env: GCC_VERSION=5 CPP=14 LIBCXX=Off
 before_install:
   - sudo unlink /usr/bin/gcc && sudo ln -s /usr/bin/gcc-5 /usr/bin/gcc
-  - gcc --version
+  - sudo unlink /usr/bin/g++ && sudo ln -s /usr/bin/g++-5 /usr/bin/g++
+  - g++ --version
   - sudo wget https://github.com/google/googletest/archive/release-1.7.0.tar.gz
   - sudo tar xf release-1.7.0.tar.gz
   - cd googletest-release-1.7.0
@@ -25,13 +25,13 @@ branches:
   only:
     - master
     - develop
-#addons:
-#  apt:
-#    sources:
-#      - ubuntu-toolchain-r-test
-#    packages:
-#      - gcc-5
-#      - g++-5
+addons:
+  apt:
+    sources:
+      - ubuntu-toolchain-r-test
+    packages:
+      - gcc-5
+      - g++-5
 notifications:
   recipients:
     - brandl.matthaeus@gmail.com
