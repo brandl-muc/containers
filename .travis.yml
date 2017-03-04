@@ -4,4 +4,6 @@ compiler:
 os:
   - linux
 script:
-  - ./test/make
+  - cd test
+  - make
+  - utest
