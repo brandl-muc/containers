@@ -2,6 +2,7 @@
 Build status:
 * master: [![Build Status](https://travis-ci.org/brandl-muc/containers.svg?branch=master)](https://travis-ci.org/brandl-muc/containers)
 * develop: [![Build Status](https://travis-ci.org/brandl-muc/containers.svg?branch=develop)](https://travis-ci.org/brandl-muc/containers)
+
 Code coverage:
 * master: [![codecov](https://codecov.io/gh/brandl-muc/containers/branch/master/graph/badge.svg)](https://codecov.io/gh/brandl-muc/containers)
 * develop: [![codecov](https://codecov.io/gh/brandl-muc/containers/branch/develop/graph/badge.svg)](https://codecov.io/gh/brandl-muc/containers)
