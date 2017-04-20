@@ -20,7 +20,9 @@ before_install:
     # Switch to gcc 5
   - sudo unlink /usr/bin/gcc && sudo ln -s /usr/bin/gcc-5 /usr/bin/gcc
   - sudo unlink /usr/bin/g++ && sudo ln -s /usr/bin/g++-5 /usr/bin/g++
+  - sudo unlink /usr/bin/gcov && sudo ln -s /usr/bin/gcov-5 /usr/bin/gcov
   - g++ --version
+  - gcov --version
     # Get googletest 1.7.0
   - sudo wget https://github.com/google/googletest/archive/release-1.7.0.tar.gz
   - sudo tar xf release-1.7.0.tar.gz
