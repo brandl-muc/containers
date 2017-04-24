@@ -34,9 +34,12 @@ before_install:
   - sudo make install
   - cd ..
   - lcov --version
+    # Switch to CMake 3.4.3
+  - wget --no-check-certificate http://cmake.org/files/v3.4/cmake-3.4.3-Linux-x86_64.tar.gz
+  - tar -xzf cmake-3.4.3-Linux-x86_64.tar.gz
+  - export PATH=$PWD/cmake-3.4.3-Linux-x86_64/bin:$PATH
 before_script:
   - cd "${TRAVIS_BUILD_DIR}"
-  - cmake --version
   - cmake -DCMAKE_BUILD_TYPE=Debug CMakeLists.txt
 script:
   - cd "${TRAVIS_BUILD_DIR}"
