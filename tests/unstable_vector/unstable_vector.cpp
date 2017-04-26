@@ -19,7 +19,7 @@
 
 #include "../../src/unstable_vector.h"
 
-#include <gtest/gtest.h>
+#include <gmock/gmock.h>
 
 using mbr::container::unstable_vector;
 
@@ -52,6 +52,6 @@ namespace container_tests
 
         // assert
         EXPECT_EQ(times, uvec.size());
-
+        EXPECT_THAT(uvec, ::testing::Each(value));
     }
 }

@@ -12,7 +12,7 @@ set(SOURCE_FILES ${SOURCE_FILES} utest.cpp)
 add_executable(utest ${SOURCE_FILES})
 add_subdirectory(src)
 add_subdirectory(tests)
-target_link_libraries(utest pthread gtest)
+target_link_libraries(utest pthread gtest gmock)
 
 # Settings
 set_property(TARGET utest PROPERTY CXX_STANDARD 14)
