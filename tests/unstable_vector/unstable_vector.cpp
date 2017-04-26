@@ -86,7 +86,7 @@ namespace container_tests
     TEST_F(Fixture_UnstableVector, Construct_Copy_ContainersAreEqual)
     {
         // arrange
-        unstable_vector<int> const input(10);
+        unstable_vector<int> input(10);
         std::iota(input.begin(), input.end(), -5);
 
         // act
@@ -94,5 +94,20 @@ namespace container_tests
 
         // assert
         EXPECT_THAT(result, ::testing::ContainerEq(input));
+    }
+
+    TEST_F(Fixture_UnstableVector, Construct_Move_ContainersAreEqual)
+    {
+        // arrange
+        unstable_vector<int> template_(10);
+        std::iota(template_.begin(), template_.end(), -5);
+        unstable_vector<int> input(template_);
+
+        // act
+        unstable_vector<int> result(std::move(input));
+
+        // assert
+        EXPECT_TRUE(input.empty());
+        EXPECT_THAT(result, ::testing::ContainerEq(template_));
     }
 }
