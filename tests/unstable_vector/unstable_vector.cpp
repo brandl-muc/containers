@@ -37,10 +37,10 @@ namespace container_tests
         // arrange
 
         // act
-        unstable_vector<int> uVec;
+        unstable_vector<int> result;
 
         // assert
-        ASSERT_TRUE(uVec.empty());
+        ASSERT_TRUE(result.empty());
     }
 
     TEST_F(Fixture_UnstableVector, Construct_NTimesCopy_ContainsNCopies)
@@ -50,11 +50,11 @@ namespace container_tests
         auto const value = 42;
 
         // act
-        unstable_vector<int> uVec(times, value);
+        unstable_vector<int> result(times, value);
 
         // assert
-        EXPECT_EQ(times, uVec.size());
-        EXPECT_THAT(uVec, ::testing::Each(value));
+        EXPECT_EQ(times, result.size());
+        EXPECT_THAT(result, ::testing::Each(value));
     }
 
     TEST_F(Fixture_UnstableVector, Construct_NTimesDefault_ContainsNCopies)
@@ -63,11 +63,11 @@ namespace container_tests
         auto const times = 15u;
 
         // act
-        unstable_vector<int> uVec(times);
+        unstable_vector<int> result(times);
 
         // assert
-        EXPECT_EQ(times, uVec.size());
-        EXPECT_THAT(uVec, ::testing::Each(decltype(uVec)::value_type{}));
+        EXPECT_EQ(times, result.size());
+        EXPECT_THAT(result, ::testing::Each(decltype(result)::value_type{}));
     }
 
     TEST_F(Fixture_UnstableVector, Construct_IteratorPair_ContainsSameElements)
@@ -77,9 +77,22 @@ namespace container_tests
         std::iota(input.begin(), input.end(), 0);
 
         // act
-        unstable_vector<int> uVec(input.cbegin(), input.cend());
+        unstable_vector<int> result(input.cbegin(), input.cend());
 
         // assert
-        EXPECT_THAT(uVec, ::testing::ElementsAreArray(input));
+        EXPECT_THAT(result, ::testing::ElementsAreArray(input));
+    }
+
+    TEST_F(Fixture_UnstableVector, Construct_Copy_ContainersAreEqual)
+    {
+        // arrange
+        unstable_vector<int> const input(10);
+        std::iota(input.begin(), input.end(), -5);
+
+        // act
+        unstable_vector<int> result(input);
+
+        // assert
+        EXPECT_THAT(result, ::testing::ContainerEq(input));
     }
 }
