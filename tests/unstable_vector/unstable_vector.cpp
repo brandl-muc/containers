@@ -22,6 +22,7 @@
 #include <gmock/gmock.h>
 
 #include <list>
+#include <numeric>
 
 using mbr::container::unstable_vector;
 
