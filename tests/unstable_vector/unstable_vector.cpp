@@ -37,7 +37,7 @@ namespace container_tests
         // arrange
 
         // act
-        unstable_vector<int> result;
+        unstable_vector<int> const result;
 
         // assert
         ASSERT_TRUE(result.empty());
@@ -50,7 +50,7 @@ namespace container_tests
         auto const value = 42;
 
         // act
-        unstable_vector<int> result(times, value);
+        unstable_vector<int> const result(times, value);
 
         // assert
         EXPECT_EQ(times, result.size());
@@ -63,7 +63,7 @@ namespace container_tests
         auto const times = 15u;
 
         // act
-        unstable_vector<int> result(times);
+        unstable_vector<int> const result(times);
 
         // assert
         EXPECT_EQ(times, result.size());
@@ -77,7 +77,7 @@ namespace container_tests
         std::iota(input.begin(), input.end(), 0);
 
         // act
-        unstable_vector<int> result(input.cbegin(), input.cend());
+        unstable_vector<int> const result(input.cbegin(), input.cend());
 
         // assert
         EXPECT_THAT(result, ::testing::ElementsAreArray(input));
@@ -90,13 +90,13 @@ namespace container_tests
         std::iota(input.begin(), input.end(), -5);
 
         // act
-        unstable_vector<int> result(input);
+        unstable_vector<int> const result(input);
 
         // assert
         EXPECT_THAT(result, ::testing::ContainerEq(input));
     }
 
-    TEST_F(Fixture_UnstableVector, Construct_Move_ContainersAreEqual)
+    TEST_F(Fixture_UnstableVector, Construct_Move_InputWasMoved)
     {
         // arrange
         unstable_vector<int> template_(10);
@@ -104,7 +104,7 @@ namespace container_tests
         unstable_vector<int> input(template_);
 
         // act
-        unstable_vector<int> result(std::move(input));
+        unstable_vector<int> const result(std::move(input));
 
         // assert
         EXPECT_TRUE(input.empty());
@@ -118,13 +118,13 @@ namespace container_tests
         std::iota(input.begin(), input.end(), -5);
 
         // act
-        unstable_vector<int> result{input};
+        unstable_vector<int> const result{input};
 
         // assert
         EXPECT_THAT(result, ::testing::ElementsAreArray(input));
     }
 
-    TEST_F(Fixture_UnstableVector, Construct_MoveFromUnderlying_ContainersAreEqual)
+    TEST_F(Fixture_UnstableVector, Construct_MoveFromUnderlying_InputWasMoved)
     {
         // arrange
         unstable_vector<int>::vector_type template_{10};
@@ -132,7 +132,7 @@ namespace container_tests
         decltype(template_) input{template_};
 
         // act
-        unstable_vector<int> result{std::move(input)};
+        unstable_vector<int> const result{std::move(input)};
 
         // assert
         EXPECT_TRUE(input.empty());
