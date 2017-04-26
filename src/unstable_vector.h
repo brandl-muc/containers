@@ -311,6 +311,18 @@ namespace mbr
             vector_type m_vector;
         };
 
+        template <typename Vector>
+        bool operator==(unstable_vector_base<Vector> const & lhs, unstable_vector_base<Vector> const & rhs)
+        {
+            return lhs.to_vector() == rhs.to_vector();
+        }
+
+        template <typename Vector>
+        bool operator!=(unstable_vector_base<Vector> const & lhs, unstable_vector_base<Vector> const & rhs)
+        {
+            return !(lhs == rhs);
+        }
+
         template <class T, class Allocator = std::allocator<T>>
         using unstable_vector = unstable_vector_base<std::vector<T, Allocator>>;
     }
