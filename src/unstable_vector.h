@@ -301,6 +301,12 @@ namespace mbr
                 m_vector.shrink_to_fit();
             }
 
+            // conversion
+            vector_type const & to_vector() const
+            {
+                return m_vector;
+            }
+
         private: // variables
             vector_type m_vector;
         };
