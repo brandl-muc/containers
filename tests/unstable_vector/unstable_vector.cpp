@@ -138,4 +138,16 @@ namespace container_tests
         EXPECT_TRUE(input.empty());
         EXPECT_THAT(result, ::testing::ElementsAreArray(template_));
     }
+    
+    TEST_F(Fixture_UnstableVector, Construct_InitializerList_ContainsListElements)
+    {
+        // arrange
+        std::initializer_list<int> const iList = {1, 2, 3, 4, 5};
+
+        // act
+        unstable_vector<int> const result = iList;
+        
+        // assert
+        EXPECT_THAT(result, ::testing::ElementsAreArray(iList));
+    }
 }
