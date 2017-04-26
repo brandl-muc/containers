@@ -110,4 +110,32 @@ namespace container_tests
         EXPECT_TRUE(input.empty());
         EXPECT_THAT(result, ::testing::ContainerEq(template_));
     }
+
+    TEST_F(Fixture_UnstableVector, Construct_CopyFromUnderlying_ContainersAreEqual)
+    {
+        // arrange
+        unstable_vector<int>::vector_type input{10};
+        std::iota(input.begin(), input.end(), -5);
+
+        // act
+        unstable_vector<int> result{input};
+
+        // assert
+        EXPECT_THAT(result, ::testing::ElementsAreArray(input));
+    }
+
+    TEST_F(Fixture_UnstableVector, Construct_MoveFromUnderlying_ContainersAreEqual)
+    {
+        // arrange
+        unstable_vector<int>::vector_type template_{10};
+        std::iota(template_.begin(), template_.end(), -5);
+        decltype(template_) input{template_};
+
+        // act
+        unstable_vector<int> result{std::move(input)};
+
+        // assert
+        EXPECT_TRUE(input.empty());
+        EXPECT_THAT(result, ::testing::ElementsAreArray(template_));
+    }
 }
