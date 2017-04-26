@@ -21,6 +21,8 @@
 
 #include <gmock/gmock.h>
 
+#include <list>
+
 using mbr::container::unstable_vector;
 
 namespace container_tests
@@ -35,10 +37,10 @@ namespace container_tests
         // arrange
 
         // act
-        unstable_vector<int> uvec;
+        unstable_vector<int> uVec;
 
         // assert
-        ASSERT_TRUE(uvec.empty());
+        ASSERT_TRUE(uVec.empty());
     }
 
     TEST_F(Fixture_UnstableVector, Construct_NTimesCopy_ContainsNCopies)
@@ -48,10 +50,36 @@ namespace container_tests
         auto const value = 42;
 
         // act
-        unstable_vector<int> uvec(times, value);
+        unstable_vector<int> uVec(times, value);
 
         // assert
-        EXPECT_EQ(times, uvec.size());
-        EXPECT_THAT(uvec, ::testing::Each(value));
+        EXPECT_EQ(times, uVec.size());
+        EXPECT_THAT(uVec, ::testing::Each(value));
+    }
+
+    TEST_F(Fixture_UnstableVector, Construct_NTimesDefault_ContainsNCopies)
+    {
+        // arrange
+        auto const times = 15u;
+
+        // act
+        unstable_vector<int> uVec(times);
+
+        // assert
+        EXPECT_EQ(times, uVec.size());
+        EXPECT_THAT(uVec, ::testing::Each(decltype(uVec)::value_type{}));
+    }
+
+    TEST_F(Fixture_UnstableVector, Construct_IteratorPair_ContainsSameElements)
+    {
+        // arrange
+        std::list<int> input(10);
+        std::iota(input.begin(), input.end(), 0);
+
+        // act
+        unstable_vector<int> uVec(input.cbegin(), input.cend());
+
+        // assert
+        EXPECT_THAT(uVec, ::testing::ElementsAreArray(input));
     }
 }
